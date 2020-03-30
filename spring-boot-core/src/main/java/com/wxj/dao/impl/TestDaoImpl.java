@@ -24,22 +24,19 @@ public class TestDaoImpl implements TestDao , CacheLoader {
     @Autowired
     private UserMapper userMapper;
 
-    @Override
     public String test() {
         List<Map<String,Object>> list = jdbcTemplate.queryForList("select * from user");
         return "success";
     }
 
-    @Override
     public List<User> findAll() {
         return userMapper.queryAll();
     }
 
-    @Override
     @Cacheable(cacheName = "userCache")
     public Map<String, Object> load() {
         List<User> users = userMapper.queryAll();
-        Map<String,Object> map = new HashMap<>();
+        Map<String,Object> map = new HashMap();
         for (User u:users) {
             map.put(u.getUserid(),u.getUsername());
         }

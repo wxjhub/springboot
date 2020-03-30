@@ -72,7 +72,7 @@ public final class CacheFacade {
         }
         Cache cache = cacheManager.getCache(cacheName);
         List<String> keys = cache.getKeys();
-        Map<String, Object> result = new HashMap<>();
+        Map<String, Object> result = new HashMap();
         for (String key : keys) {
             result.put(key, cache.get(key).getObjectValue());
         }

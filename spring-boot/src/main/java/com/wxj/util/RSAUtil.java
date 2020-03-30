@@ -28,7 +28,7 @@ public class RSAUtil {
     private static Environment environment;
     private static String publicKeyString;
     private static String privateKeyString;
-    private static Map<Integer,String> keymap = new HashMap<>();
+    private static Map<Integer,String> keymap = new HashMap();
     private final static String CYPHER="RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING";
     /**
      * 随机生成密钥对
