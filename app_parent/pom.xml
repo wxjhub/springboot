@@ -21,7 +21,7 @@
         <spring>2.0.7.RELEASE</spring>
         <mysql>5.1.25</mysql>
         <cglib>2.2.2</cglib>
-        <cp30>0.9.5-pre6</cp30>
+        <cp30>0.9.5.4</cp30>
         <ehcache>2.9.1</ehcache>
         <jasper>8.5.35</jasper>
         <jstl>1.1.2</jstl>
