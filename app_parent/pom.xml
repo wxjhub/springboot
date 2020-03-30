@@ -22,7 +22,7 @@
         <mysql>5.1.25</mysql>
         <cglib>2.2.2</cglib>
         <cp30>0.9.5-pre6</cp30>
-        <ehcache>2.9.0</ehcache>
+        <ehcache>2.9.1</ehcache>
         <jasper>8.5.35</jasper>
         <jstl>1.1.2</jstl>
     </properties>
@@ -114,18 +114,19 @@
             <!--end-->
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}}</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <distributionManagement>
+        <repository>
+            <!-- 唯一标识符 -->
+            <id>release</id>
+            <!-- 仓库名称 -->
+            <name>wxj-release</name>
+            <!-- 仓库地址 -->
+            <url>http://192.168.142.130:8081/repository/wxj-release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>wxj-snapshots</name>
+            <url>http://192.168.142.130:8081/repository/wxj-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
