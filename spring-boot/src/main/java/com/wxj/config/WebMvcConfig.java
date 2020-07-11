@@ -1,6 +1,8 @@
 package com.wxj.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -8,14 +10,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * 扩展springmvc
  * @author wangxinji
  */
-/*@Configuration*/
+//@Configuration
+//@EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter{
-    /*@Override
+    @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/*").setViewName("index");
-    }*/
+        registry.addViewController("/").setViewName("redirect:/index");
+    }
 
-    @Bean
+    /*@Bean
     public WebMvcConfigurerAdapter webMvcConfigurerAdapter(){
         WebMvcConfigurerAdapter adapter = new WebMvcConfigurerAdapter() {
             @Override
@@ -24,5 +27,5 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
             }
         };
         return adapter;
-    }
+    }*/
 }

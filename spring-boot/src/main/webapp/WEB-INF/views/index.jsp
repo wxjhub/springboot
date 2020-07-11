@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: wangxinji
@@ -11,6 +12,6 @@
     <title>text</title>
 </head>
 <body>
-   2222
+<a href="/logout">退出</a>
 </body>
 </html>

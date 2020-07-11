@@ -33,7 +33,6 @@ public final class EhCacheInterceptor implements ApplicationContextAware, Initia
 
     private ApplicationContext applicationContext;
 
-    @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
           this.applicationContext = applicationContext;
     }
@@ -76,7 +75,6 @@ public final class EhCacheInterceptor implements ApplicationContextAware, Initia
         return returnValue;
     }
 
-    @Override
     public void afterPropertiesSet() throws Exception {
         Assert.notNull(applicationContext);
         Assert.notNull(cacheFacade);
