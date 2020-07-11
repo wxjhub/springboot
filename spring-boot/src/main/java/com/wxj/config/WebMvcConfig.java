@@ -10,12 +10,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * 扩展springmvc
  * @author wangxinji
  */
-//@Configuration
-//@EnableWebMvc
+@Configuration
+@EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter{
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("redirect:/index");
+        //重定向会暴漏真实的url地址，去请求controller
+        //registry.addViewController("/").setViewName("redirect:/test/index");
+        //转发不会暴漏真实的url地址，转发走的WEB-INF下直接找jsp
+        registry.addViewController("/").setViewName("index");
     }
 
     /*@Bean
