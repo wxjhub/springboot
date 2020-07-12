@@ -33,9 +33,22 @@ public class TestController {
 
 
     @RequestMapping("/index")
-    public ModelAndView index() {
+    public ModelAndView index(HttpServletRequest request,HttpSession httpSession) {
         ModelAndView m = new ModelAndView("index");
         String result = testService.test();
+        httpSession.setAttribute("project","10086");
+        return m;
+    }
+
+    @RequestMapping("/findschmer")
+    @ResponseBody
+    public ModelAndView findschmer(HttpServletRequest request,HttpSession httpSession) {
+        ModelAndView m = new ModelAndView("test");
+        List<User> result = testService.findAll();
+        for (User user:result) {
+            m.addObject("username",user.getUsername());
+            break;
+        }
         return m;
     }
 

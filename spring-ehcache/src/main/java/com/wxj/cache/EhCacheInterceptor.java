@@ -17,7 +17,6 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-
 import java.util.Map;
 
 /**
@@ -26,7 +25,7 @@ import java.util.Map;
 @Aspect
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-public final class EhCacheInterceptor implements ApplicationContextAware, InitializingBean {
+public final class EhCacheInterceptor implements ApplicationContextAware , InitializingBean {
 
     @Autowired
     private CacheFacade cacheFacade;

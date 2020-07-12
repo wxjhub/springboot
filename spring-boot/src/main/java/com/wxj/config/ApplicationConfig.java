@@ -2,6 +2,7 @@ package com.wxj.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.wxj.DataSource.DynamicDataSource;
 import com.wxj.cache.CacheFacade;
 import net.sf.ehcache.CacheManager;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -103,7 +104,7 @@ public class ApplicationConfig {
     //jdbc使用数据库连接池进行数据库连接
     @Bean
     public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSourceProvider());
+        return new JdbcTemplate(getDataSource());
     }
 
     //整合mybatis使用数据库连接池进行数据库连接
@@ -112,7 +113,7 @@ public class ApplicationConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean =null;
         try {
             sqlSessionFactoryBean = new SqlSessionFactoryBean();
-            sqlSessionFactoryBean.setDataSource(dataSourceProvider());
+            sqlSessionFactoryBean.setDataSource(getDataSource());
             PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
             //能加载对各，使用通配符
             sqlSessionFactoryBean.setMapperLocations(resourcePatternResolver.getResources("classpath*:mapper/**/*.xml"));
@@ -146,6 +147,13 @@ public class ApplicationConfig {
         CacheFacade cacheFacade = CacheFacade.getCacheFacade();
         cacheFacade.setCacheManager(cacheManager);
         return  cacheFacade;
+    }
+
+    @Bean
+    public DataSource getDataSource() {
+        DynamicDataSource dynamicDataSource = new DynamicDataSource();
+        dynamicDataSource.setDataSource(dataSourceProvider());
+        return dynamicDataSource;
     }
 
     /**
