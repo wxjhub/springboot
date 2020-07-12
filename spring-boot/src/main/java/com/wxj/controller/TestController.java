@@ -1,14 +1,21 @@
 package com.wxj.controller;
 
+import com.wxj.authsecurity.JdbcUserDetailsService;
 import com.wxj.cache.CacheFacade;
 import com.wxj.entity.User;
+import com.wxj.entity.UserInfo;
 import com.wxj.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -21,12 +28,32 @@ public class TestController {
     @Autowired
     private TestService testService;
 
+    @Autowired
+    private JdbcUserDetailsService userDetailsService;
+
 
     @RequestMapping("/index")
     public ModelAndView index() {
         ModelAndView m = new ModelAndView("index");
         String result = testService.test();
         return m;
+    }
+
+    @RequestMapping("/sso")
+    public String sso(HttpServletRequest request) {
+        String username = "wxj";
+        ssoAuth(username);
+        //UserInfo principal = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        HttpSession session = request.getSession();
+        session.setAttribute("SPRING_SECURITY_CONTEXT",SecurityContextHolder.getContext());
+        return "forward:index";
+    }
+
+    public void ssoAuth(String username) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails.getUsername(),userDetails.getPassword(),userDetails.getAuthorities());
+        usernamePasswordAuthenticationToken.setDetails(userDetails);
+        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
     }
 
     @RequestMapping("/freemarker")

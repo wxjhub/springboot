@@ -19,6 +19,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
         //registry.addViewController("/").setViewName("redirect:/test/index");
         //转发不会暴漏真实的url地址，转发走的WEB-INF下直接找jsp
         registry.addViewController("/").setViewName("index");
+        //registry.addViewController("/").setViewName("redirect:/test/sso");
     }
 
     /*@Bean
