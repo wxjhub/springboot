@@ -1,6 +1,7 @@
 package com.wxj.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.wxj.DataSource.DynamicDataSource;
 import com.wxj.cache.CacheFacade;
@@ -32,6 +33,7 @@ import java.io.IOException;
 @EnableTransactionManagement
 @MapperScan(basePackages = {"com.wxj.mapper"})
 @EnableCaching
+@EnableApolloConfig
 @EnableAspectJAutoProxy
 public class ApplicationConfig {
 

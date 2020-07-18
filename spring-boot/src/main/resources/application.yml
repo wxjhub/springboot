@@ -1,0 +1,9 @@
+server:
+   port: 8081
+spring:
+   application:
+     name: wxj
+eureka:
+   client:
+     service-url:
+       defaultZone: http://http://192.168.142.128:8080/eureka

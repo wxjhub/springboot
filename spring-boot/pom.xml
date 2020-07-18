@@ -56,6 +56,17 @@
             <groupId>com.wxj.ehcache</groupId>
             <artifactId>spring-ehcache</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ctrip.framework.apollo</groupId>
+            <artifactId>apollo-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ctrip.framework.apollo</groupId>
+            <artifactId>apollo-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <!--TOMCA启动需要打包这里注意下，我们再打jar包的时候，需要把jsp页面也给打进去 -->
