@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * @author wangxj
+ * 根据登录后放入session中的数据源id，作为切换数据源的标识，获得对应的数据源
+ */
 @Service
 public class ProjectFilter extends GenericFilterBean {
 
