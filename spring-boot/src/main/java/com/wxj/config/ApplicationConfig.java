@@ -6,10 +6,14 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.wxj.DataSource.DynamicDataSource;
 import com.wxj.cache.CacheFacade;
 import net.sf.ehcache.CacheManager;
+import org.apache.ibatis.mapping.DatabaseIdProvider;
+import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
+import org.springframework.beans.factory.config.PropertyPathFactoryBean;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.*;
@@ -23,6 +27,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.util.Properties;
 
 /**
  * @author wangxinji
@@ -33,7 +38,7 @@ import java.io.IOException;
 @EnableTransactionManagement
 @MapperScan(basePackages = {"com.wxj.mapper"})
 @EnableCaching
-@EnableApolloConfig
+//@EnableApolloConfig
 @EnableAspectJAutoProxy
 public class ApplicationConfig {
 
@@ -117,13 +122,21 @@ public class ApplicationConfig {
             sqlSessionFactoryBean = new SqlSessionFactoryBean();
             sqlSessionFactoryBean.setDataSource(getDataSource());
             PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
-            //能加载对各，使用通配符
             sqlSessionFactoryBean.setMapperLocations(resourcePatternResolver.getResources("classpath*:mapper/**/*.xml"));
-            //sqlSessionFactoryBean.setConfigLocation("mabatis-config.xml");
+            sqlSessionFactoryBean.setDatabaseIdProvider(getDatabaseIdProvider());
         } catch (IOException e) {
             e.printStackTrace();
         }
         return sqlSessionFactoryBean;
+    }
+    @Bean
+    public DatabaseIdProvider getDatabaseIdProvider() {
+        DatabaseIdProvider databaseIdProvide = new VendorDatabaseIdProvider();
+        Properties properties = new Properties();
+        properties.setProperty("Oracle","oracle");
+        properties.setProperty("MySQL","mysql");
+        databaseIdProvide.setProperties(properties);
+        return databaseIdProvide;
     }
 
     /**
